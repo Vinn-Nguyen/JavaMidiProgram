@@ -6,7 +6,7 @@
  * 
  */
 
- package com.example;
+ package com.sound_game;
  
 import java.util.*;
 
