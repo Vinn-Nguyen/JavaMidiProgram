@@ -22,10 +22,10 @@ public class Avatar extends Shapes {
         y = y_;
     }
 
-    void display(){ //display custom sprite
-        main.imageMode(PApplet.CENTER);
-        main.image(sprite, x, y);
-    }
+    //void display(){ //display custom sprite
+        //main.imageMode(PApplet.CENTER);
+        //main.image(sprite, x, y);
+    //}
 
     void collision(Shapes shapes){ //increase/decrease/reset health when interacting with NPCs
         hit = isHit(shapes);

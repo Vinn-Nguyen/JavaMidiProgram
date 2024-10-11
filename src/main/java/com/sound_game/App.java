@@ -17,6 +17,9 @@
  
  //Processing
  import processing.core.*;
+
+ //Array Lists
+ import java.util.ArrayList;
  
  //make sure this class name matches your file name, if not fix.
  public class App extends PApplet {
@@ -25,10 +28,19 @@
 	 static FileSystem sys = FileSystems.getDefault();
  
 	 //the getSeperator() creates the appropriate back or forward slash based on the OS in which it is running -- OS X & Windows use same code :) 
-	 static String filePath = "mid"  + sys.getSeparator() +  "gardel_por.mid"; // path to the midi file -- you can change this to your file
+	 static String filePath = "mid"  + sys.getSeparator(); // path to the midi file -- you can change this to your file
 																 // location/name
- 
+	//name of all the midi files
+	String [] midiFiles = {"food", "enemy", "trash"};
+	
+	//melody manager
 	MelodyManager melodyManager = new MelodyManager();
+
+	//game control
+	ArrayList<GameController> controllers = new ArrayList<>();
+    int curState = GameController.GAME_PLAY;
+
+
 	
 	 public static void main(String[] args) {
 		 PApplet.main("com.sound_game.App");		
@@ -36,27 +48,60 @@
  
 	 public void settings()
 	 {
-		 size(500, 500);
+		 size(700, 700);
+		 
 		 melodyManager.addMidiFile(filePath);
 	 }
  
 	 //doing all the setup stuff for the midi and also make the background black
+	 //AND initializes the game
 	 public void setup() {
- 
-		 background(0);
-		melodyManager.start(0);
+		background(0);
+		 addMidiFiles();
+		 for(int i = 0; i<midiFiles.length; i++){
+			melodyManager.start(i);
+		 }
+		 initGame();
+	 }
+
+	 //add game states
+	 public void initGame(){
+		controllers.add(new GameplayController(this));
+		controllers.add(new GameEndController(this));
+	 }
+
+	 public void addMidiFiles(){
+		for(int i = 0; i<midiFiles.length; i++){
+			melodyManager.addMidiFile(filePath + midiFiles[i] + ".mid");
+		}
 	 }
  
 	 //play the melody in real-time
 	 public void draw()
 	 {
 		melodyManager.playMelodies(); 
+		controllers.get(curState).draw();
+
+		//changing game states
+		int next = controllers.get(curState).switchController();
+		if (next != GameController.DO_NOT_CHANGE){
+			controllers.get(curState).reset();
+			curState = next;
+		}
 	 }
  
-	 //start the melody at the beginning again when a key is pressed
+	 //spacebar resets the game
 	 public void keyPressed() {
-		 //player.reset();
- 
+		controllers.get(curState).keyPressed();
 	 }
 
+	 //mousedragged for the avatar
+	 public void mouseDragged() {
+		controllers.get(curState).mouseDragged();
+	 }
+
+	 //access to melodyManager
+	 public MelodyManager getMelodyManager(){
+		return melodyManager;
+	 }
  }
