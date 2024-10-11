@@ -1,3 +1,9 @@
+/*
+ Name: Wren Nguyen
+ Date: Oct.2024
+ Description: Melody Manager contains information about the midi notes
+ */
+
 package com.sound_game;
 import java.util.ArrayList;
 

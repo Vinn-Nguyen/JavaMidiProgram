@@ -1,14 +1,14 @@
 /*
  Name: Wren Nguyen
  Date: Oct.2024
- Description: GameController controlls game state
+ Description: GameController controlls game states.
  */
 
 package com.sound_game;
 import processing.core.*;
 
 public abstract class GameController {
-    PApplet main;
+    App main;
 
     //controller variables
     int nextController = -1;
@@ -16,7 +16,7 @@ public abstract class GameController {
     static final int GAME_PLAY = 0; //gameplay
     static final int GAME_END = 1; //game over screen
 
-    GameController(PApplet main_){
+    GameController(App main_){
         main = main_;
     }
 

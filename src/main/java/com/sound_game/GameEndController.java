@@ -1,14 +1,14 @@
 /*
  Name: Wren Nguyen
  Date: Oct.2024
- Description: GameEnd is the end state when the player loses
+ Description: GameEnd is the end state when the player loses.
  */
 
 package com.sound_game;
 import processing.core.*;
 
 public class GameEndController extends GameController{
-    GameEndController(PApplet main_){
+    GameEndController(App main_){
         super(main_);
     }
 

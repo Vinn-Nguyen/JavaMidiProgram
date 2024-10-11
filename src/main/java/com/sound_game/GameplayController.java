@@ -1,7 +1,7 @@
 /*
  Name: Wren Nguyen
- Date: 9.23.2024
- Description: This object controlls all the shapes and everything relating to it.
+ Date: Oct.2024
+ Description: This class stores draws/displays all the NPCs and Shapes and controls the collision.
  */
 
 package com.sound_game;
@@ -30,7 +30,7 @@ public class GameplayController extends GameController {
     int trashCount = 3;
 
 
-    GameplayController(PApplet main_){
+    GameplayController(App main_){
         super(main_);
         init(); //call to initalize
     }

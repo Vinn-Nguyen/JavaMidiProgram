@@ -3,6 +3,13 @@
  * Class: Main Class for Hello World for CC3 Class Projects streaming MIDI, etc.
  * Description: Demonstration of MIDI file manipulations, etc. & 'MelodyPlayer' sequencer, 2024 - add processing/interactivity
  * 
+ * Name: Wren Nguyen
+ * Date: Oct 2024
+ * Description: This is the Main/App class.
+ * Avatar - cat - starting Health: 10
+ * Food - green circles - increases health by 1
+ * Enemy - red rectangles - decreases health by 1
+ * Trash - white circles - reduces health to 1
  */
 
  package com.sound_game;
@@ -31,7 +38,15 @@
 	 static String filePath = "mid"  + sys.getSeparator(); // path to the midi file -- you can change this to your file
 																 // location/name
 	//name of all the midi files
-	String [] midiFiles = {"food", "enemy", "trash"};
+	String [] midiFiles = {"food", "food2", "enemy", "trash", };
+	//static constants sound files
+	static final int FOODSTART_MIDI = 1;
+	static final int FOODEND_MIDI = 2;
+	static final int ENEMY_MIDI = 3;
+	static final int TRASH_MIDI = 4;
+
+	//static avatar file
+	static PImage AVATARIMG;
 	
 	//melody manager
 	MelodyManager melodyManager = new MelodyManager();
@@ -39,8 +54,6 @@
 	//game control
 	ArrayList<GameController> controllers = new ArrayList<>();
     int curState = GameController.GAME_PLAY;
-
-
 	
 	 public static void main(String[] args) {
 		 PApplet.main("com.sound_game.App");		
@@ -49,7 +62,6 @@
 	 public void settings()
 	 {
 		 size(700, 700);
-		 
 		 melodyManager.addMidiFile(filePath);
 	 }
  
@@ -57,19 +69,24 @@
 	 //AND initializes the game
 	 public void setup() {
 		background(0);
-		 addMidiFiles();
-		 for(int i = 0; i<midiFiles.length; i++){
+		addMidiFiles();
+		AVATARIMG = loadImage("/Users/vinnnguyen/Java MIDI Program/mid/avatar.png");
+		/* test sound
+		for(int i = 0; i<midiFiles.length; i++){
 			melodyManager.start(i);
-		 }
-		 initGame();
+		}*/
+
+		initGame();
 	 }
 
 	 //add game states
 	 public void initGame(){
 		controllers.add(new GameplayController(this));
 		controllers.add(new GameEndController(this));
+		
 	 }
 
+	 //add midi files to the melody manager
 	 public void addMidiFiles(){
 		for(int i = 0; i<midiFiles.length; i++){
 			melodyManager.addMidiFile(filePath + midiFiles[i] + ".mid");
@@ -104,4 +121,9 @@
 	 public MelodyManager getMelodyManager(){
 		return melodyManager;
 	 }
+
+	 //get Avatar image
+	 public PImage getSprite(){
+        return AVATARIMG;
+    }
  }

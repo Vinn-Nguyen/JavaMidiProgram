@@ -1,21 +1,22 @@
 /*
  Name: Wren Nguyen
  Date: Oct.2024
- Description: Information for the food object is stored here. Food are
+ Description: Information for the food object is stored here. Food are green circles, increase health by 1.
  */
 
 package com.sound_game;
 import processing.core.*;
 
 public class Food extends NPC{ //inherits from NPC
-    static int red = main.color(255, 0,0);
-    static int green = main.color(0, 255,0);
 
-    Food(PApplet main_){
-        super(main_, 20, green, 2);
+    Food(App main_){
+        super(main_, 20, main_.color(0, 255,0), CIRC);
     }
 
-    void colorChange(){ //changes color from green to red
-        color = red;
+    //play "food" midi file
+    void collision(Avatar avatar){
+        int whichSound = (int) main.random(App.FOODSTART_MIDI,App.FOODEND_MIDI);
+
+        super.collision(avatar, whichSound);
     }
 }

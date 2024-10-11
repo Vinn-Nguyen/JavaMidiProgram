@@ -1,19 +1,19 @@
 /*
  Name: Wren Nguyen
  Date: 9.22.2024
- Description: Superclass for the interactive shapes (NPCs) within the Particle Engine
+ Description: Superclass for the interactive shapes (NPCs) within the Particle Engine.
  */
 
 package com.sound_game;
 import processing.core.*;
 
-public class NPC extends Shapes{ //inherits from Shapes
+public abstract class NPC extends Shapes{ //inherits from Shapes
     //call objects
     Food food;
     Enemy enemy;
     Trash trash;
 
-    NPC(PApplet main_, float sz_, int color_, int shapeType_){  //NPC container
+    NPC(App main_, float sz_, int color_, int shapeType_){  //NPC container
         super(main_, sz_, color_, shapeType_);
         spawn();
         move();
@@ -35,14 +35,19 @@ public class NPC extends Shapes{ //inherits from Shapes
         speedY = speedY * -1;
     }
 
-    void collision(Shapes shapes){ //when there is a collision, the shape will spawn at a different location
-        if(isHit(shapes)){
+    //when there is a collision, the avatar will spawn at a different location
+    //midiIndex is the index file of the melody manager
+    void collision(Avatar avatar, int midiIndex){  
+        hit = isHit(avatar);
+        if(hit){
             spawn();
+            melodies.start(midiIndex);
         }
     }
 
     void enemyCollision(Enemy enemy){ //when there is a collision between NPCs, the shape will bounce
-        if(isHit(enemy)){
+        hit = isHit(enemy);
+        if(hit){
             reverse();
         }
     }
@@ -62,9 +67,6 @@ public class NPC extends Shapes{ //inherits from Shapes
         }
     }
 
-    void keyPressed(){ //activate the keypressed from the objects
-        food.colorChange();
-        enemy.shapeChange();
-        trash.szChange();
-    }
+    //subclass inheirtance
+    abstract void collision(Avatar avatar);
 }

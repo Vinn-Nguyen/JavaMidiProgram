@@ -3,7 +3,10 @@
  * 
  * Class: MelodyPlayer
  * Description: Sends a melody of midi notes to an external player/midi channel, revised 2024 for polyphonic playing
- * 
+ *
+ Name: Wren Nguyen
+ Date: Oct.2024
+ Description: Melody Player stores MIDI/sound information
  */
 
  package com.sound_game;

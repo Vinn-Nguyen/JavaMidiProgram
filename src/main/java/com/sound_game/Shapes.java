@@ -1,14 +1,14 @@
 /*
  Name: Wren Nguyen
  Date: 9.23.2024
- Description: Superclass for all the shapes within the Particle Engine
+ Description: Superclass for all the shapes/avatar within the Particle Engine.
  */
 
 package com.sound_game;
 import processing.core.*;
 
 public class Shapes {
-    static PApplet main; //processing functionality
+    App main; //processing functionality
     Shapes shapes;
 
     //UNITS
@@ -21,14 +21,23 @@ public class Shapes {
     boolean hit; //collision boolean for when objects interact
     int shapeType; //draws the shape type: 1 = squares | 2 = circle | 3 = rectangle
     PImage sprite; //image for sprites
+    
+    MelodyManager melodies = null;
+
+    //static constants for shapeType
+    static final int RECT = 1; //square/rectangle
+    static final int CIRC = 2; //circle
+    static final int MISC = 3; //misc.
 
 
     //Superclass parent
-    Shapes(PApplet main_, float sz_, int color_, int shapeType_){
+    Shapes(App main_, float sz_, int color_, int shapeType_){
         main = main_;
         sz = sz_;
         color = color_;
         shapeType = shapeType_;
+
+        melodies = main_.getMelodyManager();
     }
 
     //displays all objects
@@ -36,11 +45,11 @@ public class Shapes {
         main.fill(color); //colors object
         main.noStroke();
         
-        if(shapeType == 1){ //draw square for enemies
-            main.rectMode(main.CENTER);
+        if(shapeType == RECT){ //draw square for enemies
+            main.rectMode(App.CENTER);
             main.rect(x, y, sz, sz);
         }
-        else if (shapeType == 2 ){ //draws circles for food 
+        else if (shapeType == CIRC){ //draws circles for food 
             main.ellipse(x, y, sz, sz);
         }
         else{ //draws rectangle for avatar
@@ -49,7 +58,7 @@ public class Shapes {
     }
     
     boolean isHit(Shapes shapes){ //collision between objects
-        float distance = PApplet.dist(x, y, shapes.getX(), shapes.getY());
+        float distance = App.dist(x, y, shapes.getX(), shapes.getY());
         return (distance < sz/2 + shapes.getSz()/2);
     }
 

@@ -1,7 +1,8 @@
 /*
  Name: Wren Nguyen
  Date: Oct.2024
- Description: Information for the avatar object is stored here. Avatar is a cat.
+ Description: Information for the avatar object is stored here. Avatar is a cat. It has a starting Health of
+ 10.
  */
 
 package com.sound_game;
@@ -10,9 +11,9 @@ import processing.core.PApplet;
 public class Avatar extends Shapes {
     int health = 10; //health
 
-    Avatar(PApplet main_){ //avatar container
-        super(main_,45, main_.color(0, 0, 255), 3);
-        //sprite = main_.getSprite();
+    Avatar(App main_){ //avatar container
+        super(main_,50, main_.color(0, 0, 255), MISC);
+        sprite = main_.getSprite();
         x = main.width/2;
         y = main.height/2;
     }
@@ -22,10 +23,10 @@ public class Avatar extends Shapes {
         y = y_;
     }
 
-    //void display(){ //display custom sprite
-        //main.imageMode(PApplet.CENTER);
-        //main.image(sprite, x, y);
-    //}
+    void display(){ //display custom sprite
+        main.imageMode(App.CENTER);
+        main.image(sprite, x, y);
+    }
 
     void collision(Shapes shapes){ //increase/decrease/reset health when interacting with NPCs
         hit = isHit(shapes);
