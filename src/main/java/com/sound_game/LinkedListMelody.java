@@ -1,3 +1,9 @@
+/*
+ * Wren Nguyen
+ * Project: Music Generator pt 1
+ * Description: LinkedListMelody contains all the commands for the linked list
+ */
+
 package com.sound_game;
 
 public class LinkedListMelody implements Drawable{
@@ -43,10 +49,10 @@ public class LinkedListMelody implements Drawable{
     }
 
     public void print(){
-        curPlayingNode = head; //start at the head
-        while(curPlayingNode != null){//traverse the list
-            System.out.println(curPlayingNode.whichMelody); //print the index
-            curPlayingNode = curPlayingNode.next; //go to the next node
+        MelodyNode current = head; //start at the head
+        while(current != null){//traverse the list
+            System.out.println(current.whichMelody); //print the index
+            current = current.next; //go to the next node
         }
     }
 
@@ -56,12 +62,12 @@ public class LinkedListMelody implements Drawable{
             head = node;
         }
         
-        curPlayingNode = head; //start at the head
-        for(int i=1; i < index && curPlayingNode != null; i++){ //create an index while traversing the list
-            curPlayingNode = curPlayingNode.getNext();
+        MelodyNode current = head; //start at the head
+        for(int i=1; i < index && current != null; i++){ //create an index while traversing the list
+            current = current.getNext();
             currentIndex = index; //assign a currentIndex to the index
         }
-        curPlayingNode.setNext(node); //insert the node
+        current.setNext(node); //insert the node
     }
 
     //insert node at start (prepend)
@@ -69,9 +75,9 @@ public class LinkedListMelody implements Drawable{
         if(isEmpty())
             head = node;
         else{
-            curPlayingNode = head; //start at the head
-            curPlayingNode = node; //create a new node at the head
-            head.next = curPlayingNode; //push the other nodes beneath the new head
+            MelodyNode current = head; //start at the head
+            current = node; //create a new node at the head
+            head.next = current; //push the other nodes beneath the new head
         }
     }
 
@@ -95,7 +101,7 @@ public class LinkedListMelody implements Drawable{
 
     void loop(boolean loop_){
         if(loop_){
-        //check if curPlayingNode is null
+        //check if current is null
             if(curPlayingNode != null){
                 
                 //check if curPlayingNode is at the end of playing --atEnd();
@@ -124,12 +130,12 @@ public class LinkedListMelody implements Drawable{
     //weave
     void weave(MelodyNode node, int count, int skip){
         MelodyNode previous = null; //reference previous node
-        curPlayingNode = head; //start from top
+        MelodyNode current = head; //start from top
 
         //traverse list to find the node's position
-        for(int i = 0; i < skip && curPlayingNode != null; i++){
-            previous = curPlayingNode;
-            curPlayingNode = curPlayingNode.next;
+        for(int i = 0; i < skip && current != null; i++){
+            previous = current;
+            current = current.next;
         }
 
         //if empty, insert at head
@@ -138,33 +144,34 @@ public class LinkedListMelody implements Drawable{
         }
         //insert after the previous node
         else{ 
-            node.next = curPlayingNode;
+            node.next = current;
             previous.next = node;
         }
 
         //move the previous node to the next position 
-        if (curPlayingNode != null){
-            previous = curPlayingNode;
-            curPlayingNode = curPlayingNode.next;
+        if (current != null){
+            previous = current;
+            current = current.next;
         }
     }
+
     //custom methods
     //clear list
     void clear(){
         MelodyNode previous = null; //reference previous node
-        curPlayingNode = head; //start from the top
+        MelodyNode current = head; //start from the top
 
-        while(curPlayingNode != null){ //traverse list to delete all nodes
+        while(current != null){ //traverse list to delete all nodes
 
             //if node is head
             if (previous == null){
-                head = curPlayingNode.next;
+                head = current.next;
             }
             else{
-                previous.next = curPlayingNode.next;
+                previous.next = current.next;
             }
             //move to the next node
-            curPlayingNode = curPlayingNode.next;
+            current = current.next;
         }
     }
 
@@ -172,16 +179,16 @@ public class LinkedListMelody implements Drawable{
     void reverse(){
         MelodyNode previous = null; //reference previous node
         MelodyNode nextNode; //node after
-        curPlayingNode = head; //start from the top
+        MelodyNode current = head; //start from the top
 
-        while(curPlayingNode != null){ //traverse list 
+        while(current != null){ //traverse list 
             //store the next node
-            nextNode = curPlayingNode.next;
+            nextNode = current.next;
             //reverse next node with the current
-            curPlayingNode.next = previous;
+            current.next = previous;
             //move nodes one along
-            previous = curPlayingNode;
-            curPlayingNode = next;
+            previous = current;
+            current = nextNode;
         }
     }
 }

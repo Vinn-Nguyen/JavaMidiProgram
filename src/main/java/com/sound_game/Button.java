@@ -54,6 +54,7 @@ public abstract class Button implements OnMousePress, Drawable {
         this(main_, label_, x_, y_, 150, 25, main_.color(255)); 
     }
 
+    //draw button
     public void draw(){
         main.fill(color);
         main.rectMode(PApplet.CENTER);
@@ -64,7 +65,7 @@ public abstract class Button implements OnMousePress, Drawable {
 
     public void mousePressed(float mx, float my){
         if(mx < x + width/2 && mx > x - width/2 && my < y+height/2 && my > y-height/2){
-            onPress();
+            onPress(); //allows button to be pressed
         }
     }
 

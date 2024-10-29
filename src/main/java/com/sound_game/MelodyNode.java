@@ -1,3 +1,9 @@
+/*
+ * Wren Nguyen
+ * Project: Music Generator pt 1
+ * Description: MelodyNode gets added to the LinkedList. Contains the getters and setters
+ */
+
 package com.sound_game;
 
 public class MelodyNode {
@@ -5,7 +11,7 @@ public class MelodyNode {
     MelodyNode next; //next node in the list
     int whichMelody; //index for melody manager
 
-    public MelodyNode(LinkedListMelodyManager manager, int i) {
+    public MelodyNode(MelodyManager manager, int i) {
         
     }
 
@@ -34,7 +40,8 @@ public class MelodyNode {
         return melodyManager.atEnd(whichMelody);
     }
 
+    //start the node
     void start(){
-        melodyManager.start(whichMelody);
+        melodyManager.playMelodies();
     }
 }

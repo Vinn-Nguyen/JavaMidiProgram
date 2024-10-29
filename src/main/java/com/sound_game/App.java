@@ -5,11 +5,7 @@
  * 
  * Name: Wren Nguyen
  * Date: Oct 2024
- * Description: This is the Main/App class.
- * Avatar - cat - starting Health: 10
- * Food - green circles - increases health by 1
- * Enemy - red rectangles - decreases health by 1
- * Trash - white circles - reduces health to 1
+ * Description: This is the main.
  */
 
  package com.sound_game;
