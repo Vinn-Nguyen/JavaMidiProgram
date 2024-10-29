@@ -59,4 +59,9 @@ public class MelodyManager {
     void start(int index){
         players.get(index).reset();
     }
+
+    //checks if we're at the end of the melody
+    boolean atEnd(int index){
+        return players.get(index).atEndOfMelody();
+    }
 }

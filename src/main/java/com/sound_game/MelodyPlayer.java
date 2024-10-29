@@ -3,10 +3,7 @@
  * 
  * Class: MelodyPlayer
  * Description: Sends a melody of midi notes to an external player/midi channel, revised 2024 for polyphonic playing
- *
- Name: Wren Nguyen
- Date: Oct.2024
- Description: Melody Player stores MIDI/sound information
+ * 
  */
 
  package com.sound_game;
@@ -76,7 +73,7 @@ public class MelodyPlayer {
 
 	// display all ports available to the MidiBus -- only output ports are relevant, however
 	//if OS X, best to choose the IAC bus we created (for mac/OS X) so can send to an external program (eg DAW/sampler)
-	//if Windows, why are you LIKE this??! -- TODO: install/document virtual port on Windows via 3rd party software
+
 	void listDevices()
 	{
 		MidiBusCRCP.listDevices(); 
@@ -150,6 +147,8 @@ public class MelodyPlayer {
 	//send a note on message and then add to playing note arrays
 	void sendNoteOn(int note_index, double cur_time, int vel)
 	{
+		//System.out.println("note on:" + melody.get(note_index));
+
 		outputMidiBus.sendNoteOn(0, (int) melody.get(note_index), vel);
 		playingRhythms.add( rhythm.get(note_index));
 		playingTimes.add( cur_time );
@@ -194,6 +193,7 @@ public class MelodyPlayer {
 	//have we reached the end of the melody?
 	boolean atEndOfMelody()
 	{
-		return note_index >= melody.size();
+												//reminder to fix this
+		return note_index >= melody.size() && playingRhythms.size()<=0 ;
 	}
 }
