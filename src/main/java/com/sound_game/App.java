@@ -71,6 +71,10 @@
 		float centerX = width/2;
 		float centerY = height/2;
 		float spacer = 8;
+
+		PlayButton play = new PlayButton(this, melody, centerX, centerY);
+		draws.add(play);
+		presses.add(play);
 	}
  
 	public void setup() {
@@ -88,9 +92,4 @@
 			press.mousePressed(mouseX, mouseY);
 		}
 	 }
-
-	//for testing
-	public void keyPressed(){
-		melody.start();
-	}
 }

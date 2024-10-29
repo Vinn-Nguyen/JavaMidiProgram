@@ -8,8 +8,7 @@ public class LinkedListMelodyManager extends MelodyManager implements Drawable{
     static String prependPath = "mid" + sys.getSeparator();
     static String apprendType = ".mid" + sys.getSeparator();
 
-    String[] files = {"motive1am", "motive2am", "motive3am",
-"motive1E", "motive2E", "motive3E"};
+    String[] files = {"motive1am", "motive2am", "motive3am", "motive1E", "motive2E", "motive3E"};
 
     LinkedListMelodyManager(){
         super();
