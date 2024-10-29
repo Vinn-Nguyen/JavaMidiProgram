@@ -5,7 +5,9 @@
  * 
  * Name: Wren Nguyen
  * Date: Oct 2024
- * Description: This is the main.
+ * Description: This is the main. Fair warning, i got it to work earlier, and then I broke it
+ * It probably has something to do with my start method
+ * I'm so sorry but i'm also so tired.
  */
 
  package com.sound_game;
@@ -66,11 +68,35 @@
 	public void setupButtons(){
 		float centerX = width/2;
 		float centerY = height/2;
-		float spacer = 8;
+		float spacer = 50;
 
 		PlayButton play = new PlayButton(this, melody, centerX, centerY);
 		draws.add(play);
 		presses.add(play);
+
+		StopButton stop = new StopButton(this, melody, centerX, centerY+spacer);
+		draws.add(stop);
+		presses.add(stop);
+
+		LoopButton loop = new LoopButton(this, melody, centerX, centerY+(spacer*2));
+		draws.add(loop);
+		presses.add(loop);
+
+		UnitTest unitTest = new UnitTest(this, melody, centerX, centerY+(spacer*3));
+		draws.add(unitTest);
+		presses.add(unitTest);
+
+		WeaveButton1 weaveButton1 = new WeaveButton1(this, melody, centerX, centerY-(spacer*3));
+		draws.add(weaveButton1);
+		presses.add(weaveButton1);
+
+		WeaveButton2 weaveButton2 = new WeaveButton2(this, melody, centerX, centerY-(spacer*2));
+		draws.add(weaveButton2);
+		presses.add(weaveButton2);
+
+		WeaveButton3 weaveButton3 = new WeaveButton3(this, melody, centerX, centerY-spacer);
+		draws.add(weaveButton3);
+		presses.add(weaveButton3);
 	}
  
 	public void setup() {

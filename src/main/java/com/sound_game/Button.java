@@ -66,6 +66,7 @@ public abstract class Button implements OnMousePress, Drawable {
     public void mousePressed(float mx, float my){
         if(mx < x + width/2 && mx > x - width/2 && my < y+height/2 && my > y-height/2){
             onPress(); //allows button to be pressed
+            
         }
     }
 

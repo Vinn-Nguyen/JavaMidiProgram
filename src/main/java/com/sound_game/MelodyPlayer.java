@@ -73,7 +73,7 @@ public class MelodyPlayer {
 
 	// display all ports available to the MidiBus -- only output ports are relevant, however
 	//if OS X, best to choose the IAC bus we created (for mac/OS X) so can send to an external program (eg DAW/sampler)
-
+	//if Windows, why are you LIKE this??! -- TODO: install/document virtual port on Windows via 3rd party software
 	void listDevices()
 	{
 		MidiBusCRCP.listDevices(); 
@@ -147,7 +147,7 @@ public class MelodyPlayer {
 	//send a note on message and then add to playing note arrays
 	void sendNoteOn(int note_index, double cur_time, int vel)
 	{
-		//System.out.println("note on:" + melody.get(note_index));
+		System.out.println("note on:" + melody.get(note_index));
 
 		outputMidiBus.sendNoteOn(0, (int) melody.get(note_index), vel);
 		playingRhythms.add( rhythm.get(note_index));
@@ -168,6 +168,23 @@ public class MelodyPlayer {
 				playingTimes.remove(i);				
 			}
 		}
+	}
+
+	public void noteOffAllNotes()
+	{
+		//TODO: implement
+	}
+
+	public ArrayList<Double> getRhythm() {
+		return rhythm;
+	}
+
+	public ArrayList<Integer> getMelody() {
+		return melody;
+	}
+
+	public ArrayList<Double> getStartTimes() {
+		return startTimes;
 	}
 	
 	//reset note to 0
@@ -195,5 +212,11 @@ public class MelodyPlayer {
 	{
 												//reminder to fix this
 		return note_index >= melody.size() && playingRhythms.size()<=0 ;
+	}
+
+	//send note offs for all playing notes
+	void stopAllNotes()
+	{
+		sendNoteOff(Double.MAX_VALUE);
 	}
 }

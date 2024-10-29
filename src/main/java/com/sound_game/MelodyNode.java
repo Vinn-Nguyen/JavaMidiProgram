@@ -7,12 +7,12 @@
 package com.sound_game;
 
 public class MelodyNode {
-    MelodyManager melodyManager = new MelodyManager(); //object reference
+    MelodyManager melodyManager;// = new MelodyManager(); //object reference
     MelodyNode next; //next node in the list
     int whichMelody; //index for melody manager
 
     public MelodyNode(MelodyManager manager, int i) {
-        
+        melodyManager = manager;
     }
 
     //get the next node
@@ -42,6 +42,6 @@ public class MelodyNode {
 
     //start the node
     void start(){
-        melodyManager.playMelodies();
+        melodyManager.start(whichMelody);
     }
 }

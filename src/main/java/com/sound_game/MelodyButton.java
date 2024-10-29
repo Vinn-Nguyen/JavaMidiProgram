@@ -12,9 +12,11 @@ public abstract class MelodyButton extends Button{
     LinkedListMelody melody;
 
     //overload the constructor for default sizes 150 x 25
-    MelodyButton(PApplet main_, LinkedListMelody melody, String label_,float x_, float y_)
+    MelodyButton(PApplet main_, LinkedListMelody melody_, String label_,float x_, float y_)
     {
         super(main_, label_, x_, y_); 
+        melody = melody_;
+
     }
 }
 
@@ -79,7 +81,7 @@ class WeaveButton2 extends MelodyButton{
     //overload the constructor for default sizes 150 x 25
     WeaveButton2(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
-        super(main_, melody_, "Weave1", x_, y_); 
+        super(main_, melody_, "Weave2", x_, y_); 
     }
     
     //weave melody option 2
@@ -93,7 +95,7 @@ class WeaveButton3 extends MelodyButton{
     //overload the constructor for default sizes 150 x 25
     WeaveButton3(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
-        super(main_, melody_, "Weave1", x_, y_); 
+        super(main_, melody_, "Weave3", x_, y_); 
     }
     
     //weave melody option 2
@@ -107,7 +109,7 @@ class UnitTest extends MelodyButton{
     //overload the constructor for default sizes 150 x 25
     UnitTest(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
-        super(main_, melody_, "Weave1", x_, y_); 
+        super(main_, melody_, "Unit Test", x_, y_); 
     }
     
     //weave melody option 2

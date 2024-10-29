@@ -39,11 +39,6 @@ public class LinkedListMelody implements Drawable{
                 curPlayingNode.start();
             }
            }
-
-           //if not playing, kill the code
-           if(!isPlaying){
-            System.exit(0);
-           }
         } 
         
     }
@@ -99,6 +94,7 @@ public class LinkedListMelody implements Drawable{
         return head == null;
     }
 
+    //loop
     void loop(boolean loop_){
         if(loop_){
         //check if current is null
@@ -116,6 +112,7 @@ public class LinkedListMelody implements Drawable{
                     //if it is null, go back to the head and redo the list
                     if(curPlayingNode == null){
                         curPlayingNode = head;
+                        curPlayingNode = curPlayingNode.getNext();
                     }
                 }
             }    
@@ -124,7 +121,7 @@ public class LinkedListMelody implements Drawable{
 
     //will kill the code when called
     void stop(){
-        this.isPlaying = false;
+        curPlayingNode = null;
     }
 
     //weave
