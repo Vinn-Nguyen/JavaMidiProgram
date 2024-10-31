@@ -169,4 +169,9 @@ public class LinkedListMelody implements Drawable{
             current = nextNode;
         }
     }
+
+    void startMelody(){
+        curPlayingNode = head;
+        head.start();
+    }
 }

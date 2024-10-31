@@ -5,9 +5,7 @@
  * 
  * Name: Wren Nguyen
  * Date: Oct 2024
- * Description: This is the main. Fair warning, i got it to work earlier, and then I broke it
- * It probably has something to do with my start method
- * I'm so sorry but i'm also so tired.
+ * Description: This is the main. Fair warning, \
  */
 
  package com.sound_game;
