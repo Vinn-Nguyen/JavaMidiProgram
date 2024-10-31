@@ -39,5 +39,4 @@ public class LinkedListMelodyManager extends MelodyManager implements Drawable{
     public void draw(){
         playMelodies();
     }
-
 }

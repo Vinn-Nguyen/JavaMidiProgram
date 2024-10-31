@@ -13,6 +13,7 @@ public class LinkedListMelody implements Drawable{
     public MelodyNode next; //next node of list
     int currentIndex = 0; //index of code
     boolean isPlaying = true; //switch for notes
+    private boolean looping = false;
     
     public void draw(){
         //fill in to play melody
@@ -96,30 +97,10 @@ public class LinkedListMelody implements Drawable{
 
     //loop
     void loop(boolean loop_){
-        if(loop_){
-        //check if current is null
-            if(curPlayingNode != null){
-                
-                //check if curPlayingNode is at the end of playing --atEnd();
-                if(curPlayingNode.atEnd()){
-                    curPlayingNode = curPlayingNode.getNext();
-                
-                    //if so, play the next node unless it is null
-                    if(curPlayingNode != null){
-                    curPlayingNode.start();
-                    }
-
-                    //if it is null, go back to the head and redo the list
-                    if(curPlayingNode == null){
-                        curPlayingNode = head;
-                        curPlayingNode = curPlayingNode.getNext();
-                    }
-                }
-            }    
-        }
+        looping = loop_;
     }
 
-    //will kill the code when called
+    //stop
     void stop(){
         curPlayingNode = null;
     }
