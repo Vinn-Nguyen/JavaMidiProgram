@@ -119,4 +119,45 @@ class UnitTest extends MelodyButton{
     }
 }
 
+//stop button extends melody button
+class PrintButton extends MelodyButton{
+    //overload the constructor for default sizes 150 x 25
+    PrintButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
+    {
+        super(main_, melody_, "Print", x_, y_); 
+    }
+    
+    //loop melody
+    public void onPress(){
+        melody.print();
+    }
+}
 
+//stop button extends melody button
+class ClearButton extends MelodyButton{
+    //overload the constructor for default sizes 150 x 25
+    ClearButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
+    {
+        super(main_, melody_, "Clear", x_, y_); 
+    }
+    
+    //loop melody
+    public void onPress(){
+        melody.clear();
+        melody.print();
+    }
+}
+
+//stop button extends melody button
+class ReverseButton extends MelodyButton{
+    //overload the constructor for default sizes 150 x 25
+    ReverseButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
+    {
+        super(main_, melody_, "Reverse", x_, y_); 
+    }
+    
+    //loop melody
+    public void onPress(){
+        melody.reverse();
+    }
+}

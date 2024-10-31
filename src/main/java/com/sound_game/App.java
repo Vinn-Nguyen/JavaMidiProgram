@@ -66,7 +66,7 @@
 	public void setupButtons(){
 		float centerX = width/2;
 		float centerY = height/2;
-		float spacer = 50;
+		float spacer = 30;
 
 		PlayButton play = new PlayButton(this, melody, centerX, centerY);
 		draws.add(play);
@@ -95,6 +95,18 @@
 		WeaveButton3 weaveButton3 = new WeaveButton3(this, melody, centerX, centerY-spacer);
 		draws.add(weaveButton3);
 		presses.add(weaveButton3);
+
+		PrintButton PrintButton = new PrintButton(this, melody, centerX, centerY - (spacer*4));
+		draws.add(PrintButton);
+		presses.add(PrintButton);
+
+		ClearButton ClearButton = new ClearButton(this, melody, centerX, centerY + (spacer*4));
+		draws.add(ClearButton);
+		presses.add(ClearButton);
+
+		ReverseButton ReverseButton = new ReverseButton(this, melody, centerX, centerY + (spacer*5));
+		draws.add(ReverseButton);
+		presses.add(ReverseButton);
 	}
  
 	public void setup() {

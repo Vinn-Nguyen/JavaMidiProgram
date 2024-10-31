@@ -17,6 +17,7 @@ public class LinkedListMelody implements Drawable{
     
     public void draw(){
         //fill in to play melody
+        play();
     }
 
     public void start(){
@@ -47,9 +48,10 @@ public class LinkedListMelody implements Drawable{
     public void print(){
         MelodyNode current = head; //start at the head
         while(current != null){//traverse the list
-            System.out.println(current.whichMelody); //print the index
+            System.out.print(current.whichMelody); //print the index
             current = current.next; //go to the next node
         }
+        System.out.println();
     }
 
     //insert melody node at indicated index
@@ -98,6 +100,11 @@ public class LinkedListMelody implements Drawable{
     //loop
     void loop(boolean loop_){
         looping = loop_;
+        if(looping == true){
+            if(curPlayingNode.atEnd()){
+                curPlayingNode = curPlayingNode.getNext();
+            }
+        }
     }
 
     //stop

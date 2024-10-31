@@ -13,6 +13,7 @@ public class MelodyNode {
 
     public MelodyNode(MelodyManager manager, int i) {
         melodyManager = manager;
+        whichMelody = i;
     }
 
     //get the next node
