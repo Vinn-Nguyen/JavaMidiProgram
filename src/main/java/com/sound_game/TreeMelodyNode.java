@@ -44,11 +44,11 @@ public class TreeMelodyNode {
     }
 
     //print tree
-    public void printTree(String space) {
-        System.out.println(space + index + ": " + melody);
+    public void printTree() {
+        System.out.println(index + ": " + melody);
         for (TreeMelodyNode nextNode : next) 
         {
-            nextNode.printTree(space + " ");
+            nextNode.printTree();
         }
     }
 }

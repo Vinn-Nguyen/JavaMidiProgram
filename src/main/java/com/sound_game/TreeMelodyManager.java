@@ -42,8 +42,8 @@ public class TreeMelodyManager extends MelodyManager implements Drawable {
     //String[] files = {"motive1Am", "motive2Am", "motive3Am", "motive1E", "motive2E", "motive3E", "MaryHadALittleLamb"};
     //String[] files = { "bwv799" };
     float tempo = 100;
-    String bus = "IAC Driver";
-    String[] files = {"bwv772", "bwv780"};
+    String bus = "Bus 1";
+    String[] files = {"bwv772"};
 
     TreeMelodyManager()
     {
