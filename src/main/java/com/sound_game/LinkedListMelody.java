@@ -7,7 +7,7 @@
 package com.sound_game;
 
 public class LinkedListMelody implements Drawable{
-    MelodyManager melodyManager;
+   TreeMelodyManager manager;
     MelodyNode curPlayingNode = null; //initialize
     public MelodyNode head; //start of list
     public MelodyNode next; //next node of list
@@ -15,6 +15,14 @@ public class LinkedListMelody implements Drawable{
     boolean isPlaying = true; //switch for notes
     private boolean looping = false;
     
+    public LinkedListMelody(TreeMelodyManager manager){
+        this.manager = manager;
+    }
+
+    public TreeMelodyManager getManager(){
+        return manager;
+    }
+
     public void draw(){
         //fill in to play melody
         play();
@@ -23,28 +31,27 @@ public class LinkedListMelody implements Drawable{
     public void start(){
         if(head != null){
             curPlayingNode = head;
-            head.start();
+            curPlayingNode.start();
         }
     }
 
     //play each node in the list
     public void play(){
         //check if curPlayingNode is null
-        if(curPlayingNode != null){
+        if(curPlayingNode != null && curPlayingNode.atEnd()){
+            next = curPlayingNode.getNext();
 
-            //check if curPlayingNode is at the end of playing --atEnd();
-           if(curPlayingNode.atEnd()){
-            curPlayingNode = curPlayingNode.getNext();
-
+            if(next != null){    
+                curPlayingNode = curPlayingNode.getNext();
+            }
             //if so, play the enext node unless it is null
-            if(curPlayingNode != null){
+            else if(looping){
+                curPlayingNode = head;
                 curPlayingNode.start();
             }
-           }
-        } 
+        }
+    } 
         
-    }
-
     public void print(){
         MelodyNode current = head; //start at the head
         while(current != null){//traverse the list
@@ -65,7 +72,10 @@ public class LinkedListMelody implements Drawable{
             current = current.getNext();
             currentIndex = index; //assign a currentIndex to the index
         }
-        current.setNext(node); //insert the node
+        if(current != null){ //of the current isnt null
+            node.setNext(current.getNext()); //init node
+            current.setNext(node); //insert the node
+        }
     }
 
     //insert node at start (prepend)
@@ -73,9 +83,8 @@ public class LinkedListMelody implements Drawable{
         if(isEmpty())
             head = node;
         else{
-            MelodyNode current = head; //start at the head
-            current = node; //create a new node at the head
-            head.next = current; //push the other nodes beneath the new head
+            node.setNext(head); //go to the start
+            head = node; //insert it node at start
         }
     }
 
@@ -107,7 +116,7 @@ public class LinkedListMelody implements Drawable{
         }
     }
 
-    //stop
+    //stop the notes mid song
     void stop(){
         curPlayingNode = null;
     }
@@ -180,5 +189,11 @@ public class LinkedListMelody implements Drawable{
     void startMelody(){
         curPlayingNode = head;
         head.start();
+    }
+
+    void addNodes(){
+        for(int i = 0; i < manager.size(); i++){
+            insertAtEnd(new MelodyNode(manager, i));
+        }
     }
 }

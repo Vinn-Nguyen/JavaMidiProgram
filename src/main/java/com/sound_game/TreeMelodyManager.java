@@ -23,7 +23,7 @@
  * void stopAll() - sends noteOffs for all the playing notes at once
  *  ArrayList<MelodyPlayer> convertToMotives(int noteCount) -- this is needed for the actual project, BUT only needs to be called by itself for extra credit
  *          it converts all the files to motives of size noteCount. the last motive may be less than noteCount long
- * 
+ */
  
 package com.sound_game;
 
@@ -41,6 +41,8 @@ public class TreeMelodyManager extends MelodyManager implements Drawable {
 
     //String[] files = {"motive1Am", "motive2Am", "motive3Am", "motive1E", "motive2E", "motive3E", "MaryHadALittleLamb"};
     //String[] files = { "bwv799" };
+    float tempo = 100;
+    String bus = "IAC Driver";
     String[] files = {"MaryHadALittleLamb"};
 
     TreeMelodyManager()
@@ -200,5 +202,25 @@ public class TreeMelodyManager extends MelodyManager implements Drawable {
     {
         playMelodies();
     }
+
+    //player size
+    public int size(){
+        return players.size();
+    }
+
+    //print everything out from the tree melody manager
+    public void print(){
+        StringBuilder melodyOutput = new StringBuilder("Tree Melody Manager: ");
+        for(int i = 0; i < players.size(); i++){
+            melodyOutput.append("Melody ").append(i).append(", ");
+        }
+        if(melodyOutput.length() > 0){
+            melodyOutput.setLength(melodyOutput.length()-2);
+        }
+        System.out.println(melodyOutput.toString());
+    }
+
+    public MelodyPlayer getPlayer(int index) {
+        return players.get(index);
+    }
 }
-    */

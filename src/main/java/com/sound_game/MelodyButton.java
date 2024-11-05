@@ -18,10 +18,16 @@ public abstract class MelodyButton extends Button{
         melody = melody_;
 
     }
+
+    public void onPress(){
+        melody.start();
+    }
 }
 
 //play button extends melody button
 class PlayButton extends MelodyButton{
+    LinkedListMelody melody;
+
     //overload the constructor for default sizes 150 x 25
     PlayButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
@@ -36,10 +42,13 @@ class PlayButton extends MelodyButton{
 
 //stop button extends melody button
 class StopButton extends MelodyButton{
+    LinkedListMelody melody;
+
     //overload the constructor for default sizes 150 x 25
     StopButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
         super(main_, melody_, "Stop", x_, y_); 
+        melody = melody_;
     }
     
     //stop melody
@@ -50,81 +59,36 @@ class StopButton extends MelodyButton{
 
 //stop button extends melody button
 class LoopButton extends MelodyButton{
+    LinkedListMelody melody;
+    boolean looping; //check to loop
+
     //overload the constructor for default sizes 150 x 25
     LoopButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
         super(main_, melody_, "Loop", x_, y_); 
+        looping = false;
+        melody = melody_;
     }
     
     //loop melody
     public void onPress(){
-        melody.loop(true);
+        looping = !looping;
+        melody.loop(looping);
+        melody.play();
     }
 }
 
-class WeaveButton1 extends MelodyButton{
-    MelodyManager manager;
-    //overload the constructor for default sizes 150 x 25
-    WeaveButton1(PApplet main_, LinkedListMelody melody_,float x_, float y_)
-    {
-        super(main_, melody_, "Weave1", x_, y_); 
-    }
-    
-    //weave melody option 1
-    public void onPress(){
-        melody.weave(new MelodyNode(manager, 1), 1, 2);
-    }
-}
 
-class WeaveButton2 extends MelodyButton{
-    MelodyManager manager;
-    //overload the constructor for default sizes 150 x 25
-    WeaveButton2(PApplet main_, LinkedListMelody melody_,float x_, float y_)
-    {
-        super(main_, melody_, "Weave2", x_, y_); 
-    }
-    
-    //weave melody option 2
-    public void onPress(){
-        melody.weave(new MelodyNode(manager, 1), 2, 3);
-    }
-}
-
-class WeaveButton3 extends MelodyButton{
-    MelodyManager manager;
-    //overload the constructor for default sizes 150 x 25
-    WeaveButton3(PApplet main_, LinkedListMelody melody_,float x_, float y_)
-    {
-        super(main_, melody_, "Weave3", x_, y_); 
-    }
-    
-    //weave melody option 2
-    public void onPress(){
-        melody.weave(new MelodyNode(manager, 1), 3, 4);
-    }
-}
-
-class UnitTest extends MelodyButton{
-    WeaveUnitTest unitTest;
-    //overload the constructor for default sizes 150 x 25
-    UnitTest(PApplet main_, LinkedListMelody melody_,float x_, float y_)
-    {
-        super(main_, melody_, "Unit Test", x_, y_); 
-    }
-    
-    //weave melody option 2
-    public void onPress(){
-        unitTest.testWeave1();
-        unitTest.testWeave2();
-    }
-}
 
 //stop button extends melody button
 class PrintButton extends MelodyButton{
+    LinkedListMelody melody;
+
     //overload the constructor for default sizes 150 x 25
     PrintButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
-        super(main_, melody_, "Print", x_, y_); 
+        super(main_, melody_, "Print", x_, y_);
+        melody = melody_;
     }
     
     //loop melody
@@ -135,10 +99,13 @@ class PrintButton extends MelodyButton{
 
 //stop button extends melody button
 class ClearButton extends MelodyButton{
+    LinkedListMelody melody;
+
     //overload the constructor for default sizes 150 x 25
     ClearButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
         super(main_, melody_, "Clear", x_, y_); 
+        melody = melody_;
     }
     
     //loop melody
@@ -150,10 +117,13 @@ class ClearButton extends MelodyButton{
 
 //stop button extends melody button
 class ReverseButton extends MelodyButton{
+    LinkedListMelody melody; 
+
     //overload the constructor for default sizes 150 x 25
     ReverseButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
         super(main_, melody_, "Reverse", x_, y_); 
+        melody = melody_;
     }
     
     //loop melody
@@ -161,3 +131,39 @@ class ReverseButton extends MelodyButton{
         melody.reverse();
     }
 }
+
+//print melody button
+class PrintMelodyButton extends Button{
+    LinkedListMelody melody;
+
+    PrintMelodyButton(PApplet main_, LinkedListMelody melody_, float x_, float y_){
+        super(main_, "Print Melody", x_, y_);
+        melody = melody_;
+    }
+    public void onPress(){
+        melody.print();
+    }
+}
+
+class TestMelodyTreeButton extends Button{
+    TreeMelody treeMelody;
+
+    TestMelodyTreeButton(PApplet main_, LinkedListMelody melody_, TreeMelody treeMelody_, float x_, float y_){
+        super(main_, "Test Tree Melody", x_, y_);
+        this.treeMelody = treeMelody_;
+    }
+
+    public void onPress(){
+        TreeMelodyManager manager = new TreeMelodyManager();
+        String [] files = {"MaryHadALittleLamb"};
+        manager.setFiles(files);
+        manager.setup();
+        manager.convertToMotivesAndReplace(4);
+        treeMelody.setRoot(null);
+        treeMelody.setMelodyManager(manager);
+        treeMelody.train(4, 0);
+        treeMelody.printTree();
+        System.out.println("Melody Tree Tested with MaryHadALittleLamb");
+    }
+}
+

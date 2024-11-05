@@ -5,7 +5,7 @@
  * 
  * Name: Wren Nguyen
  * Date: Oct 2024
- * Description: This is the main. Fair warning, \
+ * Description: This is the main.
  */
 
  package com.sound_game;
@@ -31,14 +31,14 @@
 	static FileSystem sys = FileSystems.getDefault();
 	static String prepend = "mid" + sys.getSeparator(); 
 	static String apprendType = ".mid" + sys.getSeparator();
-
 	ArrayList<OnMousePress> presses = new ArrayList<>();
 	ArrayList<Drawable> draws = new ArrayList<>();
 	
 	
-	//melody manager
-	LinkedListMelodyManager manager = new LinkedListMelodyManager();
-	LinkedListMelody melody = new LinkedListMelody(); 
+	//melody managers
+	TreeMelodyManager manager = new TreeMelodyManager();
+	LinkedListMelody melody = new LinkedListMelody(manager);
+	TreeMelody treeMelody = new TreeMelody(manager); 
 	
 	public static void main(String[] args) {
 		PApplet.main("com.sound_game.App");		
@@ -46,21 +46,16 @@
  
 	public void settings(){
 		size(500, 500);
-		manager.setup();;
-		addNodes();
-		setupButtons();
+		manager.setup();
 		addMelodyDraw();
+		setupButtons();
+		manager.print();
+		melody.print();
 	}
 
 	public void addMelodyDraw(){
 		draws.add(melody);
 		draws.add(manager);
-	}
-
-	void addNodes(){
-		for (int i = 0; i<manager.size(); i++){
-			melody.insertAtEnd(new MelodyNode (manager, i));
-		}
 	}
 
 	public void setupButtons(){
@@ -76,37 +71,29 @@
 		draws.add(stop);
 		presses.add(stop);
 
-		LoopButton loop = new LoopButton(this, melody, centerX, centerY+(spacer*2));
+		LoopButton loop = new LoopButton(this, melody, centerX, centerY + (spacer*2));
 		draws.add(loop);
 		presses.add(loop);
 
-		UnitTest unitTest = new UnitTest(this, melody, centerX, centerY+(spacer*3));
-		draws.add(unitTest);
-		presses.add(unitTest);
-
-		WeaveButton1 weaveButton1 = new WeaveButton1(this, melody, centerX, centerY-(spacer*3));
-		draws.add(weaveButton1);
-		presses.add(weaveButton1);
-
-		WeaveButton2 weaveButton2 = new WeaveButton2(this, melody, centerX, centerY-(spacer*2));
-		draws.add(weaveButton2);
-		presses.add(weaveButton2);
-
-		WeaveButton3 weaveButton3 = new WeaveButton3(this, melody, centerX, centerY-spacer);
-		draws.add(weaveButton3);
-		presses.add(weaveButton3);
-
-		PrintButton PrintButton = new PrintButton(this, melody, centerX, centerY - (spacer*4));
+		PrintButton PrintButton = new PrintButton(this, melody, centerX, centerY - (spacer*3));
 		draws.add(PrintButton);
 		presses.add(PrintButton);
 
-		ClearButton ClearButton = new ClearButton(this, melody, centerX, centerY + (spacer*4));
+		ClearButton ClearButton = new ClearButton(this, melody, centerX, centerY + (spacer*3));
 		draws.add(ClearButton);
 		presses.add(ClearButton);
 
-		ReverseButton ReverseButton = new ReverseButton(this, melody, centerX, centerY + (spacer*5));
+		ReverseButton ReverseButton = new ReverseButton(this, melody, centerX, centerY + (spacer*4));
 		draws.add(ReverseButton);
 		presses.add(ReverseButton);
+
+		TestMelodyTreeButton TestMelodyTreeButton = new TestMelodyTreeButton(this, melody, treeMelody, centerX, centerY - spacer);
+		draws.add(TestMelodyTreeButton);
+		presses.add(TestMelodyTreeButton);
+		
+		PrintMelodyButton PrintMelodyButton = new PrintMelodyButton(this, melody, centerX, centerY - (spacer*2));
+		draws.add(PrintMelodyButton);
+		presses.add(PrintMelodyButton);
 	}
  
 	public void setup() {
