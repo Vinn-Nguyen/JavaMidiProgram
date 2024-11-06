@@ -1,17 +1,18 @@
 package com.sound_game;
 import java.util.ArrayList;
 
-public class TreeMelodyNode {
+public class TreeMelodyNode extends MelodyNode {
     //array list
     ArrayList<Integer> melody;
     ArrayList<TreeMelodyNode> next;
 
     //call manager
-    TreeMelodyManager melodyManager;
+    //TreeMelodyManager melodyManager;
     //index
     int index;
 
     public TreeMelodyNode(TreeMelodyManager melodyManager, int index, ArrayList<Integer> melody){
+        super(melodyManager, index);
         this.melodyManager = melodyManager;
         this.index = index;
         this.melody = melody;
@@ -19,8 +20,15 @@ public class TreeMelodyNode {
     }
 
     //add next node
-    public void addNextNode(TreeMelodyNode node){
-        next.add(node);
+    public void addNextNodes(ArrayList<TreeMelodyNode> motives){
+        TreeMelodyNode curNode;
+        int lastPitch = melody.getLast();
+        for(int i = 0; i <= motives.size(); i++ ){
+            if(lastPitch == curNode.getFirst()){
+                ((TreeMelodyManager)melodyManager).popNoteFromMelody(index);
+            }
+
+        }
     }
 
     //get melody

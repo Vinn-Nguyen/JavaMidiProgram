@@ -9,7 +9,7 @@ package com.sound_game;
 import processing.core.PApplet;
 
 public abstract class MelodyButton extends Button{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
     //overload the constructor for default sizes 150 x 25
     MelodyButton(PApplet main_, LinkedListMelody melody_, String label_,float x_, float y_)
@@ -26,7 +26,7 @@ public abstract class MelodyButton extends Button{
 
 //play button extends melody button
 class PlayButton extends MelodyButton{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
     //overload the constructor for default sizes 150 x 25
     PlayButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
@@ -42,7 +42,7 @@ class PlayButton extends MelodyButton{
 
 //stop button extends melody button
 class StopButton extends MelodyButton{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
     //overload the constructor for default sizes 150 x 25
     StopButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
@@ -53,14 +53,14 @@ class StopButton extends MelodyButton{
     
     //stop melody
     public void onPress(){
-        melody.stop();
+        melody.stop(); 
     } 
 }
 
 //stop button extends melody button
 class LoopButton extends MelodyButton{
-    LinkedListMelody melody;
-    boolean looping; //check to loop
+    LinkedListMelody melody; //init
+    boolean looping; //check if its looping
 
     //overload the constructor for default sizes 150 x 25
     LoopButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
@@ -82,7 +82,7 @@ class LoopButton extends MelodyButton{
 
 //stop button extends melody button
 class PrintButton extends MelodyButton{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
     //overload the constructor for default sizes 150 x 25
     PrintButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
@@ -91,33 +91,32 @@ class PrintButton extends MelodyButton{
         melody = melody_;
     }
     
-    //loop melody
+    //print when pressed
     public void onPress(){
         melody.print();
     }
 }
 
-//stop button extends melody button
+//clear button extends melody button
 class ClearButton extends MelodyButton{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
-    //overload the constructor for default sizes 150 x 25
     ClearButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
     {
         super(main_, melody_, "Clear", x_, y_); 
         melody = melody_;
     }
     
-    //loop melody
+    //clear commands
     public void onPress(){
         melody.clear();
         melody.print();
     }
 }
 
-//stop button extends melody button
+//reverse the melody button 
 class ReverseButton extends MelodyButton{
-    LinkedListMelody melody; 
+    LinkedListMelody melody; //init
 
     //overload the constructor for default sizes 150 x 25
     ReverseButton(PApplet main_, LinkedListMelody melody_,float x_, float y_)
@@ -126,7 +125,7 @@ class ReverseButton extends MelodyButton{
         melody = melody_;
     }
     
-    //loop melody
+    //reverse the melody when pressed
     public void onPress(){
         melody.reverse();
     }
@@ -134,36 +133,41 @@ class ReverseButton extends MelodyButton{
 
 //print melody button
 class PrintMelodyButton extends Button{
-    LinkedListMelody melody;
+    LinkedListMelody melody; //init
 
     PrintMelodyButton(PApplet main_, LinkedListMelody melody_, float x_, float y_){
         super(main_, "Print Melody", x_, y_);
         melody = melody_;
     }
+    //makes the button pressable
     public void onPress(){
         melody.print();
     }
 }
 
-class TestMelodyTreeButton extends Button{
-    TreeMelody treeMelody;
+//plays marry had a little lamb
+class TestMary extends Button{
+    TreeMelody treeMelody; //init
 
-    TestMelodyTreeButton(PApplet main_, LinkedListMelody melody_, TreeMelody treeMelody_, float x_, float y_){
-        super(main_, "Test Tree Melody", x_, y_);
+    TestMary(PApplet main_, LinkedListMelody melody_, TreeMelody treeMelody_, float x_, float y_){
+        super(main_, "Test Mary Had a Little Lamb", x_, y_);
         this.treeMelody = treeMelody_;
     }
-
+ 
+    //makes the button pressable
     public void onPress(){
-        TreeMelodyManager manager = new TreeMelodyManager();
-        String [] files = {"MaryHadALittleLamb"};
-        manager.setFiles(files);
-        manager.setup();
-        manager.convertToMotivesAndReplace(4);
-        treeMelody.setRoot(null);
-        treeMelody.setMelodyManager(manager);
-        treeMelody.train(4, 0);
-        treeMelody.printTree();
-        System.out.println("Melody Tree Tested with MaryHadALittleLamb");
+        TreeMelodyManager manager = new TreeMelodyManager(); //creat the tree manager
+
+        String [] files = {"MaryHadALittleLamb"}; //load mary had a little lamb
+        manager.setFiles(files); //set the file
+        manager.setup(); //init the set up
+        manager.convertToMotivesAndReplace(4); //convert note count to 4
+
+        treeMelody.setRoot(null); //root = null
+        treeMelody.setMelodyManager(manager); //set the melody at the manager
+        treeMelody.train(4, 0); //count of 4, with index starting at 0
+        
+        System.out.println("Melody tree test with MaryHadALittleLamb"); //print to make sure it works
+        treeMelody.printTree(); //print the tree
     }
 }
-

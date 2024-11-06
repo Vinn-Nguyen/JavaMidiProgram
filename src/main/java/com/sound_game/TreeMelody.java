@@ -1,3 +1,9 @@
+/*
+ * Wren Nguyen
+ * Project: Tree Melody pt 2
+ * Description: contains functions and getters/setters of the tree melody
+ */
+
 package com.sound_game;
 import java.util.ArrayList;
 
@@ -25,8 +31,8 @@ public class TreeMelody{
 
             //go through index
             if(next.size() > 0){
-                int nextIndex = (int)(Math.random() * next.size());
-                current = next.get(nextIndex);
+                int nextIndex = (int)(Math.random() * next.size()); //choose random 
+                current = next.get(nextIndex); //go to the next index
             }
             else{
                 current = null;
@@ -56,36 +62,19 @@ public class TreeMelody{
 
     //train function
     public void train(int noteMotiveCount, int rootIndex){
-        ArrayList<MelodyPlayer> motives = melodyManager.convertToMotives(noteMotiveCount);
-        root = new TreeMelodyNode(melodyManager, rootIndex, motives.get(rootIndex).getMelody());
-    
+        ArrayList<TreeMelodyNode> motives = new ArrayList<>(); //init
+        melodyManager.convertToMotivesAndReplace(noteMotiveCount); //converter
+        root = new TreeMelodyNode(melodyManager, rootIndex, motives.get(rootIndex).getMelody()); //init root
+        int index = 0; //init index
+
         for(int i=0; i <motives.size(); i++){
-            TreeMelodyNode current = root;
             ArrayList <Integer> motive = motives.get(i).getMelody();
-
-            while(current != null){
-                if(motive.get(0).equals(current.getMelody().get(current.getMelody().size()))){
-                    current.addNextNode(new TreeMelodyNode(melodyManager, i, motive));
-                }
-                current = current.getNextNodes().isEmpty() ? null : current.getNextNodes().get(0);
-            }
+            TreeMelodyNode current = new TreeMelodyNode(melodyManager, i, motive);
+            motives.add(current);
         }
-    }
+        root = motives.get(index);
+        motives.remove(root);
 
-    public void printTree(TreeMelodyNode node){
-        if (node == null){
-            return;
-        } 
-        
-        System.out.println(node.getIndex() + ": " + node.getMelody());
-        for (TreeMelodyNode next : node.getNextNodes()){
-            printTree(next);
-        }
-    }
-
-    public void printTree() {
-        if(root != null){
-            root.printTree();
-        }
+        root.addNextNodes(motives);
     }
 }
